@@ -1,7 +1,7 @@
 import express from 'express';
 import middleware from './config/middleware';
 import routeConfig from './module/index';
-import './config/database';
+// import './config/database';
 
 const app = express();
 
