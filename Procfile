@@ -1,1 +1,1 @@
-web: cross-env NODE_ENV=dev nodemon --delay 2 --exec babel-node src/index.js
+web: yarn start
