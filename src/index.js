@@ -9,7 +9,7 @@ const app = express();
 
 routeConfig(app);
 
-app.listen(8080, () => console.log('Server runing at port 8888'));
+app.listen(8080, () => console.log('Server runing at port 8080'));
 
 process.on('SIGINT', () => { console.log('Bye bye!'); process.exit(); });
 
