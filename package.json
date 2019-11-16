@@ -40,5 +40,9 @@
     "sharp": "^0.22.1",
     "slug": "^0.9.3",
     "swagger-ui-express": "^4.0.5"
+  },
+  "engines": {
+    "node": "10.x",
+    "yarn": "1.x"
   }
 }
