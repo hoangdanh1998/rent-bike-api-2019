@@ -42,6 +42,7 @@
     "swagger-ui-express": "^4.0.5"
   },
   "engines": {
-    "node": "10.x"
+    "node": "10.x",
+    "yarn":"1.x"
   }
 }
