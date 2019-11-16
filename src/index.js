@@ -9,7 +9,7 @@ middleware(app);
 
 routeConfig(app);
 
-app.listen(1998, () => console.log('Server runing at port 1998'));
+app.listen(8888, () => console.log('Server runing at port 1998'));
 
 process.on('SIGINT', () => { console.log('Bye bye!'); process.exit(); });
 
