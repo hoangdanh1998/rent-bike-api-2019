@@ -1,7 +1,7 @@
 import HTTPStatus from 'http-status';
 // import userModel from './user.model';
 
-export async function login(req, res) {
+export function login(req, res) {
   const username = req.body.username;
   const password = req.body.password;
   console.log({ username, password });
