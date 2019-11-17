@@ -1,13 +1,12 @@
 import HTTPStatus from 'http-status';
-// import userModel from './user.model';
+import userModel from './user.model';
 
-export function login(req, res) {
+export async function login(req, res) {
   const username = req.body.username;
   const password = req.body.password;
   console.log({ username, password });
   try {
-    // const user = await userModel.findOne({ username, password });
-    const user = '123';
+    const user = await userModel.findOne({ username, password });
     if (!user) {
       console.log('T null ne');
       throw new Error('Invalid username password');

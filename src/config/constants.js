@@ -3,11 +3,11 @@ const devConfig = {
 };
 
 const prodConfig = {
-  MONGO_URL: '',
+  MONGO_URL: 'mongodb+srv://hoangdanh:danh02071998@cluster0-ibpiq.mongodb.net/test?retryWrites=true&w=majority',
 };
   
 const defaultConfig = {
-  PORT: process.env.PORT || 1998,
+  PORT: process.env.PORT || 8080,
 };
 
 function envConfig(env) {
