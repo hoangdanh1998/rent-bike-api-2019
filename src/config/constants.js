@@ -1,9 +1,11 @@
 const devConfig = {
   MONGO_URL: 'mongodb://localhost:27017/Rent-Bike',
+  JWT_SECRET: 'what-is-that',
 };
 
 const prodConfig = {
-  MONGO_URL: 'mongodb+srv://hoangdanh:danh02071998@cluster0-ibpiq.mongodb.net/test?retryWrites=true&w=majority',
+  MONGO_URL: 'mongodb+srv://hoangdanh:danh02071998@cluster0-ibpiq.mongodb.net/rent_bike?retryWrites=true&w=majority',
+  JWT_SECRET: 'what-is-this',
 };
   
 const defaultConfig = {
@@ -22,4 +24,9 @@ function envConfig(env) {
 export default {
   ...defaultConfig,
   ...envConfig(process.env.NODE_ENV),
+  TOKEN_LIFESPAN: 2,
+  ROLE: {
+    ADMIN: 0,
+    USER: 1,
+  },
 };
