@@ -5,10 +5,10 @@ import cors from 'cors';
 import passport from 'passport';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
-// import swaggerDev from './swagger_dev.json';
+import swaggerDev from './swagger_dev.json';
 import swaggerDocument from './swagger.json';
 
-const isProd = process.env.NODE_ENV !== 'dev';
+const isProd = process.env.NODE_ENV != 'dev';
 
 export default app => {
   if (isProd) {
@@ -20,12 +20,10 @@ export default app => {
   app.use(bodyParser.json({ limit: '5mb' }));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-  // if (isProd) {
-  // } else {
-  //   // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDev));
-  // }
+  if (isProd) {
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  } else {
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDev));
+  }
   app.use(cors());
 };
-
