@@ -11,9 +11,7 @@ const localOpts = {
 
 const localStrategy = new LocalStrategy(localOpts, async (username, password, done) => {
   try {
-    console.log({ username, password });  
     const user = await User.findOne({ username, isRemoved: false });
-    console.log(user.hashPassword(password));
     if (user && user.validatePassword(password)) {
       return done(null, user);
     } 
