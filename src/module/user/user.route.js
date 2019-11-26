@@ -1,5 +1,4 @@
 import validate from 'express-validation';
-import HTTPStatus from 'http-status';
 import { Router } from 'express';
 import * as userController from './user.controller';
 import userValidate from './user.validation';
@@ -10,4 +9,7 @@ const routers = new Router();
 
 routers.get('/', authJwt, isAdmin, userController.getAllUser);
 routers.post('/login', validate(userValidate.login), authLocal, userController.login);
+routers.post('/register', validate(userValidate.createUser), userController.createUser);
+routers.patch('/:id', authJwt, userController.editUser);
+routers.delete('/:id', authJwt, isAdmin, userController.deleteUser);
 export default routers;

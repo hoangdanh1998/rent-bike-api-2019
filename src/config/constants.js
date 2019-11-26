@@ -29,4 +29,9 @@ export default {
     ADMIN: 0,
     USER: 1,
   },
+  BIKESTATUS: {
+    AVAILABLE: 0,
+    USING: 1,
+    DISABLE: 2,
+  },
 };

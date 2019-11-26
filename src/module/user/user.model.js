@@ -30,6 +30,10 @@ const userSchema = new Schema({
     trim: true,
     type: String,
   }, 
+  email: {
+    type: String,
+    required: true,
+  },
   isRemoved: {
     type: Boolean,
     default: false,
@@ -67,6 +71,7 @@ userSchema.methods = {
       phone: this.phone,
       role: this.role,
       avatar: this.avatar,
+      isRemoved: this.isRemoved,
     };
   },
 

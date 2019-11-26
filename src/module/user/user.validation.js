@@ -1,16 +1,14 @@
 import Joi from 'joi';
 
 export default {
-  createEmployee: {
+  createUser: {
     body: {
       username: Joi.string().min(3).max(120).required(),
       password: Joi.string().min(6).max(120).required(),
       fullname: Joi.string().min(3).max(80).required(),
-      role: Joi.number().min(1).max(3).required(),
-      email: Joi.string().max(120).required(),
+      role: Joi.number().min(0).max(1).required(),
       phone: Joi.string().max(10).required(),
-      avatar: Joi.string(),
-      company: Joi.string(),
+      avatar: Joi.string(),      
     },
     options: {
       allowUnknownBody: false,
