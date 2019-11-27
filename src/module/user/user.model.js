@@ -38,6 +38,10 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   }, 
+  createDate: {
+    type: Date,
+    required: true,
+  },
 });
 
 userSchema.pre('save', function (next) {

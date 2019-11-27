@@ -6,4 +6,6 @@ import { authJwt } from '../../service/passport';
 const routers = new Router();
 
 routers.post('/', branchController.createBranch);
+routers.get('/', branchController.getAllBranch);
+routers.get('/:id', branchController.getBranchById);
 export default routers;

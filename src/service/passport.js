@@ -8,7 +8,7 @@ const localOpts = {
   usernameField: 'username',
   passReqToCallback: false,
 };
-
+// --Encode
 const localStrategy = new LocalStrategy(localOpts, async (username, password, done) => {
   try {
     const user = await User.findOne({ username, isRemoved: false });
@@ -22,7 +22,7 @@ const localStrategy = new LocalStrategy(localOpts, async (username, password, do
 });
 passport.use(localStrategy);
 
-// ---Extract
+// ---Decode
 const jwtOpts = {
   jwtFromRequest: ExtractJwt.fromHeader('token'),
   secretOrKey: constants.JWT_SECRET,

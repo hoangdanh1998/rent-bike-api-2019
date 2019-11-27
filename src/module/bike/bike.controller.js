@@ -37,11 +37,15 @@ export const createBike = async (req, res) => {
 
 export const updateBike = async (req, res) => {
   try {
-    Bike.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, bike) => {
+    const bike = Bike.findOne({ _id: req.params.id });
+    if (!bike) {
+      return res.sendStatus(httpStatus.NOT_FOUND);
+    }
+    Bike.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, bikeU) => {
       if (err) {
         return res.status(httpStatus.BAD_REQUEST).json(err.message);
       }
-      return res.status(httpStatus.OK).json(bike);
+      return res.status(httpStatus.OK).json(bikeU);
     });
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
