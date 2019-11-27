@@ -8,6 +8,7 @@ import { isAdmin } from '../../service/role';
 const routers = new Router();
 
 routers.get('/', authJwt, isAdmin, userController.getAllUser);
+routers.get('/:id', authJwt, userController.getUserById);
 routers.post('/login', validate(userValidate.login), authLocal, userController.login);
 routers.post('/register', validate(userValidate.createUser), userController.createUser);
 routers.patch('/:id', authJwt, userController.editUser);

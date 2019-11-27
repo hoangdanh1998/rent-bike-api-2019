@@ -33,6 +33,17 @@ export const getUser = async (req, res) => {
     return res.status(HTTPStatus.BAD_REQUEST).json(err.message);
   }
 };
+export const getUserById = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+    if (!user) {
+      return res.sendStatus(HTTPStatus.NOT_FOUND);
+    }
+    return res.status(HTTPStatus.OK).json(user);
+  } catch (err) {
+    return res.status(HTTPStatus.BAD_REQUEST).json(err.message);
+  }
+};
 export const getAllUser = async (req, res) => {
   const limit = parseInt(req.query.limit, 10) || 50;
   const skip = parseInt(req.query.skip, 10) || 0;

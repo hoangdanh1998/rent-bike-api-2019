@@ -6,6 +6,7 @@ import { authJwt } from '../../service/passport';
 const routers = new Router();
 
 routers.get('/', bikeController.getAllBike);
-// routers.get('/:id', bikeController.getBikeById);
-routers.post('/', bikeController.createBike);
+routers.get('/:id', bikeController.getBikeById);
+routers.post('/', authJwt, isAdmin, bikeController.createBike);
+routers.patch('/:id', bikeController.updateBike);
 export default routers;
