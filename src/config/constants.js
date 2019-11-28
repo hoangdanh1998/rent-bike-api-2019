@@ -34,4 +34,11 @@ export default {
     USING: 1,
     DISABLE: 2,
   },
+  BOOKINGSTATUS: {
+    WAITTING: 0,
+    ACCEPTED: 1,
+    USING: 2,
+    SUCCESS: 3,
+    CANCEL: 4,
+  },
 };
