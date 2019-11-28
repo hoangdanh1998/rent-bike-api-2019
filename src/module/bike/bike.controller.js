@@ -10,7 +10,8 @@ export const getAllBike = async (req, res) => {
     const query = (status) ? { bikeStatus: status } : null;
     
     const listBike = await Bike.find(query).skip(skip).limit(limit).sort({ moneyRent: 1 });
-    return res.status(httpStatus.OK).json(listBike);
+    const total = await Bike.count(query);
+    return res.status(httpStatus.OK).json({ listBike, total });
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }

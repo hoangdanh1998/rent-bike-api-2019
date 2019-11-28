@@ -6,7 +6,8 @@ import constants from '../../config/constants'
 export const getAllBooking = async (req, res) => {
   try {
     const listBooking = await Booking.find({});
-    return res.status(httpStatus.OK).json(listBooking);
+    const total = await Booking.count({});    
+    return res.status(httpStatus.OK).json({ listBooking, total });
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);       
   }
@@ -22,7 +23,8 @@ export const getBookingById = async (req, res) => {
 export const getBookingsByUserId = async (req, res) => {
   try {
     const listBooking = await Booking.find({ user: req.params.userId });
-    return res.status(httpStatus.OK).json(listBooking);
+    const total = await Booking.count({ user: req.params.userId });
+    return res.status(httpStatus.OK).json({ listBooking, total });
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);       
   }
