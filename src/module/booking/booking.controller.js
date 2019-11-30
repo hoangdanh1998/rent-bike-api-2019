@@ -39,6 +39,7 @@ export const createBooking = async (req, res) => {
 };
 
 export const updateBooking = async (req, res) => res.status(httpStatus.NOT_IMPLEMENTED);
+
 export const deleteBooking = async (req, res) => {
   try {
     const booking = await Booking.findOne({ _id: req.params.id });

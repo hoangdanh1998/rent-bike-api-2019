@@ -7,7 +7,7 @@ routers.get('/', bookingController.getAllBooking);
 // routers.get('/:id', bookingController.getBookingById);
 routers.get('/user/:userId', bookingController.getBookingsByUserId);
 routers.post('/', bookingController.createBooking);
-// routers.patch('/:id', bookingController.updateBooking);
+routers.patch('/:id', bookingController.updateBooking);
 // routers.delete('/:id', bookingController.deleteBooking);
 export default routers;
 

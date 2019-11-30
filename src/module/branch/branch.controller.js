@@ -1,6 +1,8 @@
+import redis from 'redis';
 import httpStatus from 'http-status';
 import Branch from './branch.model';
 
+const client = redis.createClient(6379);
 export const createBranch = async (req, res) => {
   try {
     const branch = await Branch.create({ ...req.body }); 
@@ -9,10 +11,21 @@ export const createBranch = async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }
 };
-export const getAllBranch = async (req, res) => {
+client.on('error', (err) => {
+  console.log(`Error ${err}`);
+});
+export const getAllBranch = (req, res) => {
   try {
-    const listBranch = await Branch.find({});
-    return res.status(httpStatus.OK).json(listBranch);
+    const branchRedisKey = 'redis:branch';
+
+    return client.get(branchRedisKey, async (err, listBranch) => {
+      if (listBranch) {
+        return res.status(httpStatus.OK).json({ scoure: 'cache', listBranches: listBranch });
+      }
+      const listBranches = await Branch.find({});
+      client.setex(branchRedisKey, 3600, JSON.stringify(listBranches));
+      return res.status(httpStatus.OK).json({ scoure: 'db', listBranches });
+    });
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }
