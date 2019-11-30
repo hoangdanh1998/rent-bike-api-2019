@@ -1,11 +1,8 @@
 import redis from 'redis';
-import url from 'url';
 import httpStatus from 'http-status';
 import Branch from './branch.model';
 
-const redisURL = url.parse(process.env.REDISCLOUD_URL);
-const client = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true });
-client.auth(redisURL.auth.split(':')[1]);
+const client = redis.createClient(process.env.REDISCLOUD_URL);
 
 export const createBranch = async (req, res) => {
   try {
