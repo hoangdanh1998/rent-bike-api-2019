@@ -2,7 +2,7 @@ import redis from 'redis';
 import httpStatus from 'http-status';
 import Branch from './branch.model';
 
-const client = redis.createClient(6379);
+const client = redis.createClient();
 export const createBranch = async (req, res) => {
   try {
     const branch = await Branch.create({ ...req.body }); 
