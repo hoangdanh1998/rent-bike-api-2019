@@ -3,6 +3,9 @@ import httpStatus from 'http-status';
 import Branch from './branch.model';
 
 const client = redis.createClient(process.env.REDISCLOUD_URL);
+client.on('error', (err) => {
+  console.log(`Error ${err}`);
+});
 
 export const createBranch = async (req, res) => {
   try {
@@ -12,9 +15,7 @@ export const createBranch = async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }
 };
-client.on('error', (err) => {
-  console.log(`Error ${err}`);
-});
+
 export const getAllBranch = (req, res) => {
   try {
     const branchRedisKey = 'redis:branch';

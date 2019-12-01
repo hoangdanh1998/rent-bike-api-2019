@@ -20,10 +20,12 @@ export default app => {
   app.use(bodyParser.json({ limit: '5mb' }));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());
+
   if (isProd) {
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   } else {
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDev));
   }
+  
   app.use(cors());
 };

@@ -4,6 +4,7 @@ import * as bookingController from './booking.controller';
 const routers = new Router();
 
 routers.get('/', bookingController.getAllBooking);
+routers.get('/times', bookingController.getMostBooking);
 // routers.get('/:id', bookingController.getBookingById);
 routers.get('/user/:userId', bookingController.getBookingsByUserId);
 routers.post('/', bookingController.createBooking);

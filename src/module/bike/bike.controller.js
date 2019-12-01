@@ -9,7 +9,8 @@ export const getAllBike = async (req, res) => {
   try {
     const query = (status) ? { bikeStatus: status } : null;
     
-    const listBike = await Bike.find(query).skip(skip).limit(limit).sort({ moneyRent: 1 });
+    const listBike = await Bike.find(query).skip(skip).limit(limit).sort({ moneyRent: 1 })
+      .populate('branch');
     const total = await Bike.count(query);
     return res.status(httpStatus.OK).json({ listBike, total });
   } catch (err) {
@@ -27,6 +28,7 @@ export const getBikeById = async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }
 };
+
 export const createBike = async (req, res) => {
   try {
     const bike = await Bike.create({ ...req.body, status: constants.BIKESTATUS.AVAILABLE }); 

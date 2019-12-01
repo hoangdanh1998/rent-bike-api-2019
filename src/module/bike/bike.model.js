@@ -55,4 +55,4 @@ bikeSchema.methods = {
     };
   },
 };
-export default mongoose.model('bikes', bikeSchema);
+export default mongoose.model('bike', bikeSchema);

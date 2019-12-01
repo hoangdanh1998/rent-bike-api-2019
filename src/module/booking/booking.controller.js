@@ -1,11 +1,14 @@
+/* eslint-disable no-sparse-arrays */
 import httpStatus from 'http-status';
 import Booking from './booking.model';
-import constants from '../../config/constants'
-  ;
+import constants from '../../config/constants';
 
 export const getAllBooking = async (req, res) => {
   try {
-    const listBooking = await Booking.find({});
+    const listBooking = await Booking.find({}).populate({ path: 'bike', 
+      populate: {
+        path: 'branch',
+      } }).populate('user');
     const total = await Booking.count({});    
     return res.status(httpStatus.OK).json({ listBooking, total });
   } catch (err) {
@@ -38,6 +41,24 @@ export const createBooking = async (req, res) => {
   }
 };
 
+export const getMostBooking = async (req, res) => {
+  try {
+    const aggregate = await Booking.aggregate([{
+      $lookup: {
+        from: 'bikes',
+        localField: 'bike',
+        foreignField: '_id',
+        as: 'bike',
+      }, 
+    }, 
+    { $unwind: '$bike' }, 
+    { $sortByCount: '$bike' },
+    ]);
+    return res.status(httpStatus.OK).json(aggregate);
+  } catch (err) {
+    return res.status(httpStatus.BAD_REQUEST).json({ Error: err.message });
+  }
+};
 export const updateBooking = async (req, res) => res.status(httpStatus.NOT_IMPLEMENTED);
 
 export const deleteBooking = async (req, res) => {

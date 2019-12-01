@@ -17,6 +17,7 @@
     "cross-env": "^5.2.0",
     "eslint": "^4.19.1",
     "eslint-config-equimper": "^2.2.2",
+    "express-swagger-generator": "^1.1.15",
     "nodemon": "^1.18.9"
   },
   "dependencies": {
@@ -43,6 +44,7 @@
     "redis-server": "^1.2.2",
     "sharp": "^0.22.1",
     "slug": "^0.9.3",
+    "swagger-node-express": "^2.1.3",
     "swagger-ui-express": "^4.0.5"
   },
   "engines": {
