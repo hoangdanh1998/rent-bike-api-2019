@@ -9,6 +9,8 @@ export default {
       role: Joi.number().min(0).max(1).required(),
       phone: Joi.string().max(10).required(),
       avatar: Joi.string(),      
+      createDate: Joi.date(),
+      email: Joi.string(),
     },
     options: {
       allowUnknownBody: false,

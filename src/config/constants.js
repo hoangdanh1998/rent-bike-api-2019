@@ -5,7 +5,7 @@ const devConfig = {
 
 const prodConfig = {
   MONGO_URL: 'mongodb+srv://hoangdanh:danh02071998@cluster0-ibpiq.mongodb.net/rent_bike?retryWrites=true&w=majority',
-  JWT_SECRET: 'what-is-this',
+  JWT_SECRET: 'what-is-that',
 };
   
 const defaultConfig = {
@@ -41,4 +41,5 @@ export default {
     SUCCESS: 3,
     CANCEL: 4,
   },
+  
 };

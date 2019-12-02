@@ -17,6 +17,10 @@ const branchSchema = new Schema({
     type: String,
     required: true,    
   },
+  isActive: {
+    type: Boolean,
+    required: true,
+  },
 });
 branchSchema.methods = {
   toJSON() {
@@ -26,6 +30,7 @@ branchSchema.methods = {
       address: this.address,
       latitude: this.latitude,
       longtitude: this.longtitude,
+      isActive: this.isActive,
     };
   },
 };

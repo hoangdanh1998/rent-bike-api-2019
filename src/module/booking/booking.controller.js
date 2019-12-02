@@ -59,7 +59,20 @@ export const getMostBooking = async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json({ Error: err.message });
   }
 };
-export const updateBooking = async (req, res) => res.status(httpStatus.NOT_IMPLEMENTED);
+export const updateBooking = async (req, res) => {
+  try {
+    const booking = await Booking.findOne({ _id: req.params.id });
+    if (!booking) {
+      return res.sendStatus(httpStatus.NOT_FOUND);
+    }
+    Object.keys(req.body).forEach(key => {
+      booking[key] = req.body[key];
+    });
+    await booking.save();
+  } catch (err) {
+    return res.status(httpStatus.BAD_REQUEST).json({ Error: err.message });
+  }
+}; 
 
 export const deleteBooking = async (req, res) => {
   try {

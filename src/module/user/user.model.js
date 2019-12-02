@@ -40,7 +40,7 @@ const userSchema = new Schema({
   }, 
   createDate: {
     type: Date,
-    required: true,
+    default: new Date(),
   },
 });
 
@@ -76,6 +76,7 @@ userSchema.methods = {
       role: this.role,
       avatar: this.avatar,
       isRemoved: this.isRemoved,
+      createDate: this.createDate,
     };
   },
 
