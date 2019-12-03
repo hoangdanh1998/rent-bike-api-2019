@@ -1,4 +1,4 @@
-import redis from 'redis';
+// import redis from 'redis';
 import httpStatus from 'http-status';
 import Branch from './branch.model';
 import Bike from '../bike/bike.model';
