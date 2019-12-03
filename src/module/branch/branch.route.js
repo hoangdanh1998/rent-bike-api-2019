@@ -8,6 +8,7 @@ const routers = new Router();
 routers.post('/', authJwt, isAdmin, branchController.createBranch);
 routers.get('/', branchController.getAllBranchNoCache);
 routers.get('/:id', branchController.getBranchById);
+routers.get('/:id/bikes', branchController.getBikesInBranch);
 routers.patch('/:id', branchController.updateBranch);
 routers.delete('/:id', authJwt, isAdmin, branchController.deleteBranch);
 export default routers;

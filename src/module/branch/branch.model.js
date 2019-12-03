@@ -21,6 +21,10 @@ const branchSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  district: {
+    type: String,
+    required: true,
+  },
 });
 branchSchema.methods = {
   toJSON() {
@@ -30,6 +34,7 @@ branchSchema.methods = {
       address: this.address,
       latitude: this.latitude,
       longtitude: this.longtitude,
+      district: this.district,
       isActive: this.isActive,
     };
   },
