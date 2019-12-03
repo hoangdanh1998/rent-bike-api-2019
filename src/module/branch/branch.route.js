@@ -7,6 +7,7 @@ const routers = new Router();
 
 routers.post('/', authJwt, isAdmin, branchController.createBranch);
 routers.get('/', branchController.getAllBranchNoCache);
+routers.get('/bikes', branchController.countBikesAllBranch);
 routers.get('/:id', branchController.getBranchById);
 routers.get('/:id/bikes', branchController.getBikesInBranch);
 routers.patch('/:id', branchController.updateBranch);

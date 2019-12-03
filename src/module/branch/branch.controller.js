@@ -53,7 +53,24 @@ export const getBikesInBranch = async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json({ Err: err.message });
   }
 };
-
+export const countBikesAllBranch = async (req, res) => {
+  try {
+    const aggregate = await Bike.aggregate([{
+      $lookup: {
+        from: 'branches',
+        localField: 'branch',
+        foreignField: '_id',
+        as: 'branch',
+      }, 
+    }, 
+    { $unwind: '$branch' }, 
+    { $sortByCount: '$branch' },
+    ]);
+    return res.status(httpStatus.OK).json(aggregate);
+  } catch (err) {
+    return res.status(httpStatus.BAD_REQUEST).json({ Err: err.message });
+  }
+};
 export const getBranchById = async (req, res) => {
   try {
     const branch = await Branch.findById(req.params.id);
