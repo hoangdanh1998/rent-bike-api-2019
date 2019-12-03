@@ -26,7 +26,8 @@ import Bike from '../bike/bike.model';
 export const getAllBranchNoCache = async (req, res) => {
   try {
     const listBranches = await Branch.find({});
-    return res.status(httpStatus.OK).json({ scoure: 'db', listBranches });
+    const total = listBranches.length;
+    return res.status(httpStatus.OK).json({ scoure: 'db', listBranches, total });
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }
