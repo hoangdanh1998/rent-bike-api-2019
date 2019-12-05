@@ -9,5 +9,5 @@ export default app => {
   app.use('/bikes', bikeRouters);
   app.use('/branches', branchRouters);
   app.use('/bookings', bookingRouters);
-  app.use('/service', service);
+  app.use('/service/google', service);
 };

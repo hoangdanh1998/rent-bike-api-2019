@@ -1,9 +1,9 @@
 import HTTPStatus from 'http-status';
 import User from './user.model';
+import constants from '../../config/constants';
 
 export async function login(req, res) {
   const user = req.user; // done ben passport dem qua
-  
   if (!user) {
     return res.status(HTTPStatus.BAD_REQUEST).json('Invalid username password');
   }
@@ -62,7 +62,7 @@ export const getAllUser = async (req, res) => {
 };
 export const createUser = async (req, res) => {
   try {
-    const user = await User.create({ ...req.body, role: 1 }); 
+    const user = await User.create({ ...req.body, role: constants.ROLE.USER }); 
     return res.status(HTTPStatus.OK).json(user);
   } catch (err) {
     return res.status(HTTPStatus.BAD_REQUEST).json(err.message);

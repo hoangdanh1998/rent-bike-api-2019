@@ -11,6 +11,7 @@ export default {
       avatar: Joi.string(),      
       createDate: Joi.date(),
       email: Joi.string(),
+      uid: Joi.string(),
     },
     options: {
       allowUnknownBody: false,

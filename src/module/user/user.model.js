@@ -6,12 +6,10 @@ import constants from '../../config/constants';
 const userSchema = new Schema({
   username: {
     type: String,
-    required: true,
     unique: [true, 'Username is already'],
   },
   password: {
     type: String,
-    required: true,
     trim: true,
   },
   fullname: {
@@ -20,11 +18,9 @@ const userSchema = new Schema({
   },     
   phone: {
     type: String,
-    required: true,
   },
   role: {
     type: Number,
-    required: true,    
   },
   avatar: {
     trim: true,
@@ -41,6 +37,10 @@ const userSchema = new Schema({
   createDate: {
     type: Date,
     default: new Date(),
+  },
+  uid: {
+    type: String,
+    unique: [true, 'UID is already'],
   },
 });
 
@@ -77,6 +77,7 @@ userSchema.methods = {
       avatar: this.avatar,
       isRemoved: this.isRemoved,
       createDate: this.createDate,
+      uid: this.uid,
     };
   },
 
