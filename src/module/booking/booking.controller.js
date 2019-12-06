@@ -2,6 +2,8 @@
 import httpStatus from 'http-status';
 import Booking from './booking.model';
 import constants from '../../config/constants';
+import Branch from '../branch/branch.model';
+import User from '../user/user.model';
 
 export const getAllBooking = async (req, res) => {
   try {
@@ -34,7 +36,50 @@ export const getBookingsByUserId = async (req, res) => {
 };
 export const createBooking = async (req, res) => {
   try {
-    const booking = await Booking.create({ ...req.body, status: constants.BOOKINGSTATUS.WAIT });
+    const type = req.body.type;
+    let receiveAddress;
+    let receiveLongtitude;
+    let receiveLatitude;
+    let returnLongtitude;
+    let returnLatitude;
+    
+    if (type === constants.DELIVERYTYPE.ATBRANCH) {
+      try {
+        console.log(type);
+        const branch = await Branch.findById({ _id: req.body.branchid });
+        receiveAddress = branch.address;
+        receiveLongtitude = branch.receiveLongtitude;
+        receiveLatitude = branch.returnLatitude;
+        returnLongtitude = branch.returnLongtitude;
+        returnLatitude = branch.returnLatitude;
+      } catch (err) {
+        return res.status(httpStatus.NOT_FOUND).json('Branch not found');
+      }
+    } else {
+      receiveAddress = req.body.receiveAddress;
+    }
+    
+    const user = await User.findOne({ _id: req.body.user });
+    console.log({ ...req.body });
+    console.log({ user });
+    const tempBooking = {
+      bike: req.body.bike,
+      user: req.body.user,
+      pickUpDate: req.body.pickUpDate,
+      returnDate: req.body.returnDate,
+      receiveAddress,
+      returnAddress: req.body.receiveAddress,
+      bookingDate: new Date(),
+      receiveLongtitude, 
+      receiveLatitude, 
+      returnLongtitude, 
+      returnLatitude,
+      phone: user.phone,
+      fullname: user.fullname,            
+      bookingStatus: constants.BOOKINGSTATUS.WAITTING,
+    };
+    console.log(tempBooking);
+    const booking = await Booking.create({ ...tempBooking });
     return res.status(httpStatus.OK).json(booking);
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);

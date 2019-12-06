@@ -41,5 +41,9 @@ export default {
     SUCCESS: 3,
     CANCEL: 4,
   },
+  DELIVERYTYPE: {
+    ATBRANCH: 0,
+    ATHOME: 1,
+  },
   
 };

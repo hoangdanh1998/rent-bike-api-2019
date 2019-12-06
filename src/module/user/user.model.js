@@ -7,6 +7,7 @@ const userSchema = new Schema({
   username: {
     type: String,
     unique: [true, 'Username is already'],
+    
   },
   password: {
     type: String,

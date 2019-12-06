@@ -9,6 +9,7 @@ const bookingSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'user',
+    required: true,
   },
   bookingDate: {
     type: Date,
@@ -28,23 +29,18 @@ const bookingSchema = new Schema({
   },
   returnAddress: {
     type: String,
-    required: true,
   },
   receiveLatitude: {
     type: String,
-    required: true,
   },
   receiveLongtitude: {
     type: String,
-    required: true,
   },
   returnLatitude: {
     type: String,
-    required: true,
   },
   returnLongtitude: {
     type: String,
-    required: true,
   },
   bookingStatus: {
     type: Number,
