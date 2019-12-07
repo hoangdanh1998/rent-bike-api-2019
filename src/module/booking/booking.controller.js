@@ -128,7 +128,22 @@ export const deleteBooking = async (req, res) => {
     if (!booking) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    booking.status = constants.BOOKINGSTATUS.CANCEL;
+    booking.bookingStatus = constants.BOOKINGSTATUS.CANCEL;
+    await booking.save();
+    return res.status(httpStatus.OK).json(booking);
+  } catch (err) {
+    return res.status(httpStatus.BAD_REQUEST).json(err.message);
+  }
+};
+export const changeStatusBooking = async (req, res) => {
+  try {
+    const booking = await Booking.findOne({ _id: req.params.id });
+    if (!booking) {
+      return res.sendStatus(httpStatus.NOT_FOUND);
+    }
+    const status = req.params.status;
+    console.log(status);
+    if (status > 0 && status < 5) { booking.bookingStatus = status; }
     await booking.save();
     return res.status(httpStatus.OK).json(booking);
   } catch (err) {

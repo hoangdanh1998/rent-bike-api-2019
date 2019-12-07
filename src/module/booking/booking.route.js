@@ -10,5 +10,6 @@ routers.get('/user/:userId', bookingController.getBookingsByUserId);
 routers.post('/', bookingController.createBooking);
 routers.patch('/:id', bookingController.updateBooking);
 routers.delete('/:id', bookingController.deleteBooking);
+routers.patch('/:id/:status', bookingController.changeStatusBooking);
 export default routers;
 
