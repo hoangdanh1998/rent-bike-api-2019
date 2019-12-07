@@ -36,16 +36,16 @@ export const getBookingsByUserId = async (req, res) => {
 };
 export const createBooking = async (req, res) => {
   try {
-    const type = req.body.type;
+    const type = req.param.type;
     let receiveAddress;
     let receiveLongtitude;
     let receiveLatitude;
     let returnLongtitude;
     let returnLatitude;
-    
+    console.log(type);
+  
     if (type === constants.DELIVERYTYPE.ATBRANCH) {
       try {
-        console.log(type);
         const branch = await Branch.findById({ _id: req.body.branchid });
         receiveAddress = branch.address;
         receiveLongtitude = branch.receiveLongtitude;
@@ -60,6 +60,9 @@ export const createBooking = async (req, res) => {
     }
     
     const user = await User.findOne({ _id: req.body.user });
+    if (!user) {
+      return res.status(httpStatus.NOT_FOUND).json('User not found');
+    }
     console.log({ ...req.body });
     console.log({ user });
     const tempBooking = {

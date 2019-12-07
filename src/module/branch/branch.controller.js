@@ -103,6 +103,7 @@ export const deleteBranch = async (req, res) => {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
     branch.isActive = false;
+    branch.save();
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }

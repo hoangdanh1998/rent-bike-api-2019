@@ -11,5 +11,5 @@ routers.get('/bikes', branchController.countBikesAllBranch);
 routers.get('/:id', branchController.getBranchById);
 routers.get('/:id/bikes', branchController.getBikesInBranch);
 routers.patch('/:id', branchController.updateBranch);
-routers.delete('/:id', authJwt, isAdmin, branchController.deleteBranch);
+routers.delete('/:id', branchController.deleteBranch);
 export default routers;

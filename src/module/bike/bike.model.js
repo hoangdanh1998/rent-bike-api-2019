@@ -38,6 +38,7 @@ const bikeSchema = new Schema({
     type: Array,
     required: true,
   },
+  
 });
 bikeSchema.methods = {
   toJSON() {

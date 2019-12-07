@@ -23,6 +23,7 @@
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.3",
+    "busboy": "^0.3.1",
     "compression": "^1.7.3",
     "cors": "^2.8.5",
     "excerpt-html": "^1.2.1",
@@ -40,6 +41,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "querystring": "^0.2.0",
     "redis": "^2.8.0",
     "redis-server": "^1.2.2",
     "sharp": "^0.22.1",
