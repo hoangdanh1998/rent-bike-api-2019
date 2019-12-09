@@ -77,7 +77,7 @@ export const createBooking = async (req, res) => {
       receiveLatitude, 
       returnLongtitude, 
       returnLatitude,
-      phone: user.phone,
+      phone: req.body.phone,
       fullname: user.fullname,            
       bookingStatus: constants.BOOKINGSTATUS.WAITTING,
     };

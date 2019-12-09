@@ -10,7 +10,6 @@ import Bike from '../bike/bike.model';
 // export const getAllBranch = (req, res) => {
 //   try {
 //     const branchRedisKey = 'redis:branch';
-
 //     return client.get(branchRedisKey, async (err, listBranch) => {
 //       if (listBranch) {
 //         return res.status(httpStatus.OK).json({ scoure: 'cache', listBranches: listBranch });
