@@ -33,6 +33,7 @@ export const getAllBranchNoCache = async (req, res) => {
 };
 export const createBranch = async (req, res) => {
   try {
+    console.log({ ...req.body });
     const branch = await Branch.create({ ...req.body }); 
     return res.status(httpStatus.OK).json(branch);
   } catch (err) {

@@ -36,22 +36,25 @@ export const getBookingsByUserId = async (req, res) => {
 };
 export const createBooking = async (req, res) => {
   try {
-    const type = req.param.type;
+    console.log({ ...req.body });
+    const type = req.body.type;
     let receiveAddress;
     let receiveLongtitude;
     let receiveLatitude;
     let returnLongtitude;
     let returnLatitude;
-    console.log(type);
+    let returnAddress;
+    console.log({ type });
   
     if (type === constants.DELIVERYTYPE.ATBRANCH) {
       try {
-        const branch = await Branch.findById({ _id: req.body.branchid });
+        const branch = await Branch.findById({ _id: req.body.branchId });
         receiveAddress = branch.address;
         receiveLongtitude = branch.receiveLongtitude;
         receiveLatitude = branch.returnLatitude;
         returnLongtitude = branch.returnLongtitude;
         returnLatitude = branch.returnLatitude;
+        returnAddress = branch.address;
       } catch (err) {
         return res.status(httpStatus.NOT_FOUND).json('Branch not found');
       }
@@ -71,7 +74,7 @@ export const createBooking = async (req, res) => {
       pickUpDate: req.body.pickUpDate,
       returnDate: req.body.returnDate,
       receiveAddress,
-      returnAddress: req.body.receiveAddress,
+      returnAddress,
       bookingDate: new Date(),
       receiveLongtitude, 
       receiveLatitude, 
