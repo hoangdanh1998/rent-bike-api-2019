@@ -1,3 +1,4 @@
+import moment from 'moment';
 import mongoose, { Schema } from 'mongoose';
 import { hashSync, compareSync } from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
@@ -77,7 +78,7 @@ userSchema.methods = {
       role: this.role,
       avatar: this.avatar,
       isRemoved: this.isRemoved,
-      createDate: this.createDate,
+      createDate: moment(this.createDate).format('YYYY-MM-DD'),
       uid: this.uid,
     };
   },

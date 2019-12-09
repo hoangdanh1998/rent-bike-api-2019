@@ -1,3 +1,4 @@
+import moment from 'moment';
 import mongoose, { Schema } from 'mongoose';
 
 const bookingSchema = new Schema({
@@ -65,13 +66,13 @@ bookingSchema.methods = {
       _id: this.id,
       bike: this.bike,
       user: this.user,
-      bookingDate: this.bookingDate,
+      bookingDate: moment(this.bookingDate).format('YYYY-MM-DD'),
       receiveAddress: this.receiveAddress,
+      returnAddress: this.returnAddress,
+      pickUpDate: moment(this.pickUpDate).format('YYYY-MM-DD'),
+      returnDate: moment(this.returnDate).format('YYYY-MM-DD'),
       receiveLongtitude: this.receiveLongtitude,
       receiveLatitude: this.receiveLatitude,
-      pickUpDate: this.pickUpDate,
-      returnDate: this.returnDate,
-      returnAddress: this.returnAddress,
       returnLongtitude: this.returnLongtitude,
       returnLatitude: this.returnLatitude,
       bookingStatus: this.bookingStatus,
