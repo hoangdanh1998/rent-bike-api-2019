@@ -54,6 +54,10 @@ const bookingSchema = new Schema({
     type: String,
     required: true,
   },
+  receiveType: {
+    type: Number,
+    required: true,
+  },
 });
 bookingSchema.methods = {
   toJSON() {
@@ -67,12 +71,13 @@ bookingSchema.methods = {
       receiveLatitude: this.receiveLatitude,
       pickUpDate: this.pickUpDate,
       returnDate: this.returnDate,
-      returnAddress: this.returnDate,
+      returnAddress: this.returnAddress,
       returnLongtitude: this.returnLongtitude,
       returnLatitude: this.returnLatitude,
       bookingStatus: this.bookingStatus,
       phone: this.phone,
       fullname: this.fullname,
+      receiveType: this.receiveType,
     };
   },
 };

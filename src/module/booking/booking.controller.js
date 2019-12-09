@@ -27,7 +27,7 @@ export const getBookingById = async (req, res) => {
 };
 export const getBookingsByUserId = async (req, res) => {
   try {
-    const listBooking = await Booking.find({ user: req.params.userId });
+    const listBooking = await Booking.find({ user: req.params.userId }).populate('bike');
     const total = await Booking.count({ user: req.params.userId });
     return res.status(httpStatus.OK).json({ listBooking, total });
   } catch (err) {
@@ -50,24 +50,24 @@ export const createBooking = async (req, res) => {
       try {
         const branch = await Branch.findById({ _id: req.body.branchId });
         receiveAddress = branch.address;
+        returnAddress = branch.address;
         receiveLongtitude = branch.receiveLongtitude;
         receiveLatitude = branch.returnLatitude;
         returnLongtitude = branch.returnLongtitude;
         returnLatitude = branch.returnLatitude;
-        returnAddress = branch.address;
       } catch (err) {
         return res.status(httpStatus.NOT_FOUND).json('Branch not found');
       }
     } else {
       receiveAddress = req.body.receiveAddress;
+      returnAddress = receiveAddress;
     }
     
     const user = await User.findOne({ _id: req.body.user });
     if (!user) {
       return res.status(httpStatus.NOT_FOUND).json('User not found');
     }
-    console.log({ ...req.body });
-    console.log({ user });
+    
     const tempBooking = {
       bike: req.body.bike,
       user: req.body.user,
@@ -80,6 +80,7 @@ export const createBooking = async (req, res) => {
       receiveLatitude, 
       returnLongtitude, 
       returnLatitude,
+      receiveType: type,
       phone: req.body.phone,
       fullname: user.fullname,            
       bookingStatus: constants.BOOKINGSTATUS.WAITTING,
