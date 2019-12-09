@@ -7,7 +7,7 @@ const routers = new Router();
 
 routers.get('/', bikeController.getAllBike);
 routers.get('/:id', bikeController.getBikeById);
-routers.post('/', authJwt, isAdmin, bikeController.createBike);
+routers.post('/', bikeController.createBike);
 routers.patch('/:id', bikeController.updateBike);
 routers.delete('/:id', bikeController.deleteBike);
 export default routers;
