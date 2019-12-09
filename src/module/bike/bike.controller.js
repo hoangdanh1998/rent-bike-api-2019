@@ -46,7 +46,7 @@ export const updateBike = async (req, res) => {
     }
     Bike.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, bikeU) => {
       if (err) {
-        return res.status(httpStatus.BAD_REQUEST).json(err.message);
+        throw (err);
       }
       return res.status(httpStatus.OK).json(bikeU);
     });

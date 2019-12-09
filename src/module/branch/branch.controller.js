@@ -88,10 +88,12 @@ export const updateBranch = async (req, res) => {
     if (!branch) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    Object.keys(req.body).forEach(key => {
-      branch[key] = req.body[key];
+    Branch.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, branchUpdated) => {
+      if (err) {
+        throw (err);
+      }
+      return res.status(httpStatus.OK).json({ Updated: branchUpdated });
     });
-    await branch.save();
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }

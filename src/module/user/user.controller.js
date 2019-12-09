@@ -16,12 +16,12 @@ export const editUser = async (req, res) => {
     if (!user) {
       return res.sendStatus(HTTPStatus.NOT_FOUND);
     }
-    Object.keys(req.body).forEach(key => {
-      user[key] = req.body[key];
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, userUpdated) => {
+      if (err) {
+        throw (err);
+      }
+      return res.status(HTTPStatus.OK).json({ Updated: userUpdated });
     });
-
-    await user.save();
-    return res.status(HTTPStatus.OK).json(user.toJSON());
   } catch (err) {
     return res.status(HTTPStatus.BAD_REQUEST).json(err.message);
   }

@@ -114,13 +114,16 @@ export const getMostBooking = async (req, res) => {
 export const updateBooking = async (req, res) => {
   try {
     const booking = await Booking.findOne({ _id: req.params.id });
+    console.log({ ...req.body });
     if (!booking) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    Object.keys(req.body).forEach(key => {
-      booking[key] = req.body[key];
+    Booking.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, bookingUpdated) => {
+      if (err) {
+        throw (err);
+      }
+      return res.status(httpStatus.OK).json({ Updated: bookingUpdated });
     });
-    await booking.save();
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json({ Error: err.message });
   }
