@@ -25,6 +25,10 @@ export default {
   ...defaultConfig,
   ...envConfig(process.env.NODE_ENV),
   TOKEN_LIFESPAN: 2,
+  TRANSMISSTIONTYPE: {
+    XESO: 0,
+    TAYGA: 1,
+  },
   ROLE: {
     ADMIN: 0,
     USER: 1,

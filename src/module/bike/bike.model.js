@@ -48,7 +48,7 @@ bikeSchema.methods = {
       branch: this.branch,
       bikeStatus: this.bikeStatus,
       engineSize: this.engineSize,
-      transmissionType: this.engineSize,
+      transmissionType: this.transmissionType,
       moneyRent: this.moneyRent,
       moneyDeposit: this.moneyDeposit,
       collaterals: this.collaterals,
