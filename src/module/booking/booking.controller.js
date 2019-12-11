@@ -17,6 +17,7 @@ export const getAllBooking = async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);       
   }
 };
+
 export const getBookingById = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
@@ -128,7 +129,21 @@ export const updateBooking = async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json({ Error: err.message });
   }
 }; 
+export const acceptBooking = async (req, res) => {
+  try {
+    console.log(req.params.id);
 
+    const booking = await Booking.findOne({ _id: req.params.id });
+    if (!booking) {
+      return res.sendStatus(httpStatus.NOT_FOUND);
+    }
+    booking.bookingStatus = constants.BOOKINGSTATUS.ACCEPTED;
+    await booking.save();
+    return res.status(httpStatus.OK).json(booking);
+  } catch (err) {
+    return res.status(httpStatus.BAD_REQUEST).json(err.message);
+  }
+};
 export const deleteBooking = async (req, res) => {
   try {
     const booking = await Booking.findOne({ _id: req.params.id });
