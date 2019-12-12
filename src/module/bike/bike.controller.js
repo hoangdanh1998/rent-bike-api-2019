@@ -23,25 +23,33 @@ export const getAllBikeFilter = async (req, res) => {
   const status = constants.BIKESTATUS.AVAILABLE;
   const pickUpDate = req.query.pickUpDate;
   const returnDate = req.query.returnDate;
-  const transmissionType = req.query.transmissionType;
+  const transmissionType = req.query.transmissionType || 0;
   
   try {
     const listBike = [];
-    await Booking.find({ 
+    const listBookingAvailable = await Booking.find({ 
       $or: [
         { pickUpDate: { $gt: returnDate } },
         { returnDate: { $lt: pickUpDate } },
       ],
-    }, { bike: 1 }, (err, cursor) => {
-      console.log({ cursor });
-      for (const document of cursor) {
-        if (!listBike.includes(document.bike) && document.bike !== null) {
-          listBike.push(document.bike); 
-        }
+    }, { bike: 1 }).populate('bike');
+
+    for (const booking of listBookingAvailable) {      
+      console.log({ booking });
+      if (!listBike.includes(booking.bike)) {
+        console.log('if1');
+        if (booking.bike !== null) {
+          console.log('if2');
+          listBike.push(booking.bike); 
+  
+          console.log('end if2');
+          console.log(booking.bike._id);
+        } 
       }
-    }).populate('bike');
-    console.log(transmissionType);
-    const listBike1 = listBike.filter(bike => {
+    }
+    
+    console.log({ transmissionType });
+    const listBike1 = await listBike.filter(bike => {
       console.log({ return: bike.transmissionType == transmissionType });
       return bike.transmissionType == transmissionType;
     });
