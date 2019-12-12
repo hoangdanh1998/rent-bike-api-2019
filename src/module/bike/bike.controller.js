@@ -33,17 +33,21 @@ export const getAllBikeFilter = async (req, res) => {
         { returnDate: { $lt: pickUpDate } },
       ],
     }, { bike: 1 }, (err, cursor) => {
-      // console.log({ cursor });
+      console.log({ cursor });
       for (const document of cursor) {
-        // console.log(document.bike);
-        if (!listBike.includes(document) && !document) { listBike.push(document.bike); }
+        if (!listBike.includes(document.bike) && document.bike !== null) {
+          listBike.push(document.bike); 
+        }
       }
     }).populate('bike');
     console.log(transmissionType);
-    const listBike1 = listBike.filter(bike => bike.transmissionType == transmissionType);
+    const listBike1 = listBike.filter(bike => {
+      console.log({ return: bike.transmissionType == transmissionType });
+      return bike.transmissionType == transmissionType;
+    });
     const total = listBike1.length;
      
-    return res.status(httpStatus.OK).json({ listBike: listBike1, total });
+    return res.status(httpStatus.OK).json({ listBike1, total });
     // .json({ listBike, total })
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
