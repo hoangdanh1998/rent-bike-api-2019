@@ -9,8 +9,9 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://bike-rental-71835.firebaseio.com',
 });
-const routers = new Router();
+const registrationToken = 'YOUR_REGISTRATION_TOKEN';
 
+const routers = new Router();
 routers.get('/', async (req, res) => {
   const idToken = req.headers.token;
   try {
@@ -50,5 +51,21 @@ routers.get('/', async (req, res) => {
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }
+});
+routers.post('/', async (req, res) => {
+  const payload = {
+    data: {
+      score: '850',
+      time: '2:45',
+    },
+    token: registrationToken,
+  };
+  // Send a message to the device corresponding to the provided
+  // registration token.
+  const response = await admin.messaging().send(payload)
+    .catch((error) => {
+      console.log('Error sending message:', error);
+    });
+  console.log('Successfully sent message:', response);
 });
 export default routers;

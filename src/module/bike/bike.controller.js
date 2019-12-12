@@ -36,7 +36,7 @@ export const getAllBikeFilter = async (req, res) => {
       // console.log({ cursor });
       for (const document of cursor) {
         // console.log(document.bike);
-        listBike.push(document.bike);
+        if (!listBike.includes(document)) { listBike.push(document.bike); }
       }
     }).populate('bike');
     console.log(transmissionType);
