@@ -30,7 +30,10 @@ export const getAllBikeFilter = async (req, res) => {
         { pickUpDate: { $gt: returnDate } },
         { returnDate: { $lt: pickUpDate } },
       ],
-    }, { bike: 1 }).populate('bike');
+    }).populate({ path: 'bike', 
+    populate: {
+      path: 'branch',
+    } });
 
     for (const booking of listBookingAvailable) {      
       console.log({ booking });
@@ -51,6 +54,7 @@ export const getAllBikeFilter = async (req, res) => {
       console.log({ return: bike.transmissionType == transmissionType });
       return bike.transmissionType == transmissionType;
     });
+
     const total = listBike1.length;
     return res.status(httpStatus.OK).json({ listBike: listBike1, total });
   } catch (err) {
