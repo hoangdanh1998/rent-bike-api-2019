@@ -18,15 +18,13 @@ export const getAllBike = async (req, res) => {
 };
 
 export const getAllBikeFilter = async (req, res) => {
-  const limit = parseInt(req.query.limit, 10) || 50;
-  const skip = parseInt(req.query.skip, 10) || 0;
-  const status = constants.BIKESTATUS.AVAILABLE;
   const pickUpDate = req.query.pickUpDate;
   const returnDate = req.query.returnDate;
   const transmissionType = req.query.transmissionType || 0;
   
   try {
     const listBike = [];
+    
     const listBookingAvailable = await Booking.find({ 
       $or: [
         { pickUpDate: { $gt: returnDate } },
@@ -54,9 +52,7 @@ export const getAllBikeFilter = async (req, res) => {
       return bike.transmissionType == transmissionType;
     });
     const total = listBike1.length;
-     
-    return res.status(httpStatus.OK).json({ listBike1, total });
-    // .json({ listBike, total })
+    return res.status(httpStatus.OK).json({ listBike: listBike1, total });
   } catch (err) {
     return res.status(httpStatus.BAD_REQUEST).json(err.message);
   }
