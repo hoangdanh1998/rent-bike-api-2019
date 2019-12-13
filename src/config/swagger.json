@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "title": "Rent Bike Swagger"
   },
-  "host": "localhost:8080",
+  "host": "https://rent-bike-api-2019.herokuapp.com/",
   "basePath": "/",
   "schemes": [
     "http"
