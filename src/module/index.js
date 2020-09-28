@@ -6,7 +6,7 @@ import serviceRouters from "../service/firebase";
 // import redisRouters from '../service/redis/redis-location.controller';
 
 export default (app) => {
-  app.use("/", (req, res) => res.send("hello world"));
+  app.use("/", (req, res) => res.send("hello world 1"));
   app.use("/users", userRouters);
   app.use("/bikes", bikeRouters);
   app.use("/branches", branchRouters);
